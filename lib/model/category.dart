@@ -1,11 +1,11 @@
 class Category {
-  final String categoryId;
+  final int categoryId;
   final String categoryName;
-  final String categoryIcon;
+  String? categoryIcon;
 
   Category({
     required this.categoryId,
     required this.categoryName,
-    required this.categoryIcon,
+    this.categoryIcon,
   });
 }
