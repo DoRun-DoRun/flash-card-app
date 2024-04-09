@@ -1,3 +1,4 @@
+import 'package:flash_card_app/pages/setting.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,10 +29,23 @@ class MyAppHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text('Example')),
+      body: Center(
+        // button to navigate to the next page
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingPage()),
+            );
+          },
+          child: const Text('Go to the next page'),
+        ),
+      ),
+    );
   }
 }
-
 
 // Extend ConsumerWidget instead of StatelessWidget, which is exposed by Riverpod
 // class MyApp extends ConsumerWidget {
@@ -51,7 +65,3 @@ class MyAppHome extends StatelessWidget {
 //     );
 //   }
 // }
-
-
-
-
