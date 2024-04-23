@@ -1,33 +1,51 @@
-import 'dart:math';
-
 import 'package:flash_card_app/assets/word_data.dart';
 import 'package:flash_card_app/model/card.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'card_repo.g.dart';
 
-// 무작위 카드 Provider
 @riverpod
-WordCard randomCard(RandomCardRef ref) {
-  final randomIndex = Random().nextInt(wordData.length);
-  final randomWord = wordData[randomIndex];
+class CardList extends _$CardList {
+  @override
+  List<WordCard> build() => wordData.map((data) {
+        return WordCard(
+          category: data["category"],
+          korWord: data["korWord"],
+          engWord: data["engWord"],
+          image: data["image"],
+          history: List<bool>.from(data["history"]),
+        );
+      }).toList();
 
-  return WordCard.fromJson(randomWord);
-}
+  List<WordCard> filterByCategory(String? category) {
+    // state의 WordCard 리스트에서 주어진 카테고리와 일치하는 객체만 필터링하여 반환
+    return state.where((card) => card.category.english == category).toList();
+  }
 
-// 특정 인덱스의 카드 Provider
-@riverpod
-WordCard cardByIndex(CardByIndexRef ref, int index) {
-  final word = wordData[index];
+  void shuffleCard() {
+    // 상태(`state`)를 복사하여 리스트를 임의로 섞습니다.
+    final shuffledWordData = state;
+    shuffledWordData.shuffle();
 
-  return WordCard.fromJson(word);
-}
+    // 섞인 리스트를 상태에 할당합니다.
+    state = shuffledWordData;
+  }
 
-// 주어진 category 값과 일치하는 WordCard 객체만 필터링
-@riverpod
-List<WordCard> allCard(AllCardRef ref, String? categoryName) {
-  return wordData
-      .where((data) => WordCard.fromJson(data).category.english == categoryName)
-      .map((data) => WordCard.fromJson(data))
-      .toList();
+  void editHistory(bool isCorrect, int index) {
+    // 주어진 인덱스에 해당하는 WordCard 객체를 가져옵니다.
+    final wordCard = state[index];
+    // history 배열에 isCorrect 값을 추가합니다.
+    wordCard.history.add(isCorrect);
+
+    // history 길이가 5를 넘으면 가장 오래된 요소를 삭제하여 길이를 5로 유지합니다.
+    if (wordCard.history.length > 5) {
+      wordCard.history.removeAt(0);
+    }
+
+    // 업데이트된 WordCard 객체를 state에 반영합니다.
+    state = [
+      for (int i = 0; i < state.length; i++)
+        if (i == index) wordCard else state[i]
+    ];
+  }
 }

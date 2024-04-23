@@ -1,6 +1,6 @@
 import 'package:flash_card_app/model/category.dart';
 
-const wordData = [
+List<Map<String, dynamic>> wordData = [
   {
     "category": CategoryCode.color,
     "korWord": "빨간색",

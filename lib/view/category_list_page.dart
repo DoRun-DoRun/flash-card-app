@@ -1,3 +1,4 @@
+import 'package:flash_card_app/model/card.dart';
 import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,8 @@ class CategoryListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final wordCardList = ref.watch(allCardProvider(categoryName));
+    final wordCardList =
+        ref.read(cardListProvider.notifier).filterByCategory(categoryName);
 
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +31,13 @@ class CategoryListPage extends ConsumerWidget {
             final wordCard = wordCardList[index];
             return ListTile(
               title: Text(wordCard.korWord),
-              subtitle: Text(wordCard.engWord),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(wordCard.engWord),
+                  Text(wordCard.history.toString())
+                ],
+              ),
             );
           }),
     );

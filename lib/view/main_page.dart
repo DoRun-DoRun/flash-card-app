@@ -13,7 +13,7 @@ class MainPage extends ConsumerStatefulWidget {
 
 class _MainPageState extends ConsumerState<MainPage> {
   bool isAnswer = false;
-  WordCard? randomCard;
+  int index = 0;
 
   void _onTap() {
     setState(() {
@@ -21,16 +21,23 @@ class _MainPageState extends ConsumerState<MainPage> {
     });
   }
 
-  void _onRefresh() {
+  void _onCheck(bool isCorrect) {
+    ref.read(cardListProvider.notifier).editHistory(isCorrect, index);
+    final cardList = ref.read(cardListProvider);
+
     setState(() {
-      isAnswer = false;
-      ref.refresh(randomCardProvider);
+      isAnswer = !isAnswer;
+      if (index < cardList.length - 1) {
+        index++;
+      } else {
+        index = 0;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final randomCard = ref.watch(randomCardProvider);
+    final cardList = ref.watch(cardListProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -50,14 +57,28 @@ class _MainPageState extends ConsumerState<MainPage> {
             onTap: _onTap,
             child: Center(
               child: isAnswer
-                  ? Text('Korean Word: ${randomCard.korWord}')
-                  : Text('English Word: ${randomCard.engWord}'),
+                  ? Column(
+                      children: [
+                        Text('Korean Word: ${cardList[index].korWord}'),
+                        Text('History: ${cardList[index].history}'),
+                      ],
+                    )
+                  : Text('English Word: ${cardList[index].engWord}'),
             ),
           ),
           isAnswer
-              ? ElevatedButton(
-                  onPressed: _onRefresh,
-                  child: const Text("Random Word"),
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => _onCheck(true),
+                      child: const Text("Correct Word"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => _onCheck(false),
+                      child: const Text("Wrong Word"),
+                    ),
+                  ],
                 )
               : Container()
         ],
