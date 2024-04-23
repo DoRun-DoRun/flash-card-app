@@ -1,8 +1,6 @@
-// We create a "provider", which will store a value (here "Hello world").
-// By using a provider, this allows us to mock/override the value exposed.
 import 'dart:math';
 
-import 'package:flash_card_app/main.dart';
+import 'package:flash_card_app/assets/word_data.dart';
 import 'package:flash_card_app/model/card.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -25,40 +23,11 @@ WordCard cardByIndex(CardByIndexRef ref, int index) {
   return WordCard.fromJson(word);
 }
 
-// 모든 카드 데이터 Provider
+// 주어진 category 값과 일치하는 WordCard 객체만 필터링
 @riverpod
-List<WordCard> allCard(AllCardRef ref) {
-  return wordData.map((data) => WordCard.fromJson(data)).toList();
-}
-
-// 카드 데이터들을 관리하는 종합적인 Provider
-@riverpod
-WordCardDataProvider cardData(CardDataRef ref) {
-  // 무작위 카드를 가져오는 Provider 감시
-  final randomCard = ref.watch(randomCardProvider);
-
-  // 특정 인덱스의 카드를 가져오는 Provider 감시
-  cardByIndex(index) => ref.watch(cardByIndexProvider(index));
-
-  // 모든 카드 데이터를 가져오는 Provider 감시
-  final allCards = ref.watch(allCardProvider);
-
-  return WordCardDataProvider(
-    randomCard: randomCard,
-    cardByIndex: cardByIndex,
-    allCards: allCards,
-  );
-}
-
-// 카드 데이터들을 관리하는 객체
-class WordCardDataProvider {
-  final WordCard randomCard;
-  final WordCard Function(int) cardByIndex;
-  final List<WordCard> allCards;
-
-  WordCardDataProvider({
-    required this.randomCard,
-    required this.cardByIndex,
-    required this.allCards,
-  });
+List<WordCard> allCard(AllCardRef ref, String? categoryName) {
+  return wordData
+      .where((data) => WordCard.fromJson(data).category.english == categoryName)
+      .map((data) => WordCard.fromJson(data))
+      .toList();
 }

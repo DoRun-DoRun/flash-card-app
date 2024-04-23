@@ -169,33 +169,131 @@ class _CardByIndexProviderElement extends AutoDisposeProviderElement<WordCard>
   int get index => (origin as CardByIndexProvider).index;
 }
 
-String _$allCardHash() => r'28a2287878ae3be8e27a4a80060e83c7bf634000';
+String _$allCardHash() => r'820ccf4ae69d0b8e0c6c1207709b2731240d7a23';
 
 /// See also [allCard].
 @ProviderFor(allCard)
-final allCardProvider = AutoDisposeProvider<List<WordCard>>.internal(
-  allCard,
-  name: r'allCardProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$allCardHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const allCardProvider = AllCardFamily();
 
-typedef AllCardRef = AutoDisposeProviderRef<List<WordCard>>;
-String _$cardDataHash() => r'edc73fb535426606649b5c88fada6c47ff45f25b';
+/// See also [allCard].
+class AllCardFamily extends Family<List<WordCard>> {
+  /// See also [allCard].
+  const AllCardFamily();
 
-/// See also [cardData].
-@ProviderFor(cardData)
-final cardDataProvider = AutoDisposeProvider<WordCardDataProvider>.internal(
-  cardData,
-  name: r'cardDataProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$cardDataHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+  /// See also [allCard].
+  AllCardProvider call(
+    String? categoryName,
+  ) {
+    return AllCardProvider(
+      categoryName,
+    );
+  }
 
-typedef CardDataRef = AutoDisposeProviderRef<WordCardDataProvider>;
+  @override
+  AllCardProvider getProviderOverride(
+    covariant AllCardProvider provider,
+  ) {
+    return call(
+      provider.categoryName,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'allCardProvider';
+}
+
+/// See also [allCard].
+class AllCardProvider extends AutoDisposeProvider<List<WordCard>> {
+  /// See also [allCard].
+  AllCardProvider(
+    String? categoryName,
+  ) : this._internal(
+          (ref) => allCard(
+            ref as AllCardRef,
+            categoryName,
+          ),
+          from: allCardProvider,
+          name: r'allCardProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$allCardHash,
+          dependencies: AllCardFamily._dependencies,
+          allTransitiveDependencies: AllCardFamily._allTransitiveDependencies,
+          categoryName: categoryName,
+        );
+
+  AllCardProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.categoryName,
+  }) : super.internal();
+
+  final String? categoryName;
+
+  @override
+  Override overrideWith(
+    List<WordCard> Function(AllCardRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: AllCardProvider._internal(
+        (ref) => create(ref as AllCardRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        categoryName: categoryName,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<List<WordCard>> createElement() {
+    return _AllCardProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is AllCardProvider && other.categoryName == categoryName;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, categoryName.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin AllCardRef on AutoDisposeProviderRef<List<WordCard>> {
+  /// The parameter `categoryName` of this provider.
+  String? get categoryName;
+}
+
+class _AllCardProviderElement extends AutoDisposeProviderElement<List<WordCard>>
+    with AllCardRef {
+  _AllCardProviderElement(super.provider);
+
+  @override
+  String? get categoryName => (origin as AllCardProvider).categoryName;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
