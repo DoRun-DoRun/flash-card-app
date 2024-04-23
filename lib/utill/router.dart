@@ -18,7 +18,11 @@ final router = GoRouter(routes: [
     builder: (context, state) => const CategoryPage(),
   ),
   GoRoute(
-    path: '/category/list',
-    builder: (context, state) => const CategoryListPage(),
+    path: '/category/:categoryName',
+    builder: (context, state) {
+      final categoryName = state.pathParameters['categoryName'];
+
+      return CategoryListPage(categoryName: categoryName);
+    },
   )
 ]);
