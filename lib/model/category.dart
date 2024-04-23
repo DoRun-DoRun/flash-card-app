@@ -1,7 +1,7 @@
 enum CategoryCode {
-  animal("animal", "동물"),
-  plant("plant", "식물"),
-  color("clolr", "색깔");
+  animal("동물", "animal"),
+  plant("식물", "plant"),
+  color("색깔", "color");
 
   final String korean;
   final String english;
