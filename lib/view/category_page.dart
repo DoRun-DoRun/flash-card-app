@@ -12,14 +12,7 @@ class CategoryPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.go('/');
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ],
+        title: const Text("Category"),
       ),
       body: ListView.builder(
           itemCount: categoryList.length,
@@ -27,7 +20,7 @@ class CategoryPage extends ConsumerWidget {
             final wordCard = categoryList[index];
             return GestureDetector(
               onTap: () {
-                context.go('/category/${wordCard.english}');
+                context.push('/category/${wordCard.english}');
               },
               child: ListTile(
                 title: Text(wordCard.korean),

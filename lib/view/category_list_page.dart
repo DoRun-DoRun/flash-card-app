@@ -1,4 +1,3 @@
-import 'package:flash_card_app/model/card.dart';
 import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,14 +15,7 @@ class CategoryListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.go('/category');
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ],
+        title: Text(categoryName.toString()),
       ),
       body: ListView.builder(
           itemCount: wordCardList.length,
