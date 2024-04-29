@@ -13,7 +13,7 @@ class CategoryPage extends StatelessWidget {
             onPressed: () {
               context.pop();
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
         ],
       ),

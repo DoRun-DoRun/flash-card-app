@@ -32,6 +32,8 @@ class MyApp extends ConsumerWidget {
     final String value = ref.watch(helloWorldProvider);
 
     return MaterialApp.router(
+      //디버그 라벨 제거
+      debugShowCheckedModeBanner: false,
       routerConfig: router,
     );
   }
