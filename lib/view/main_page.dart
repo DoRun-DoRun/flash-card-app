@@ -1,5 +1,7 @@
 import 'package:flash_card_app/repository/card_repo.dart';
+import 'package:flash_card_app/view/card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -49,39 +51,7 @@ class _MainPageState extends ConsumerState<MainPage> {
               icon: const Icon(Icons.settings))
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: _onTap,
-            child: Center(
-              child: isAnswer
-                  ? Column(
-                      children: [
-                        Text('Korean Word: ${cardList[index].korWord}'),
-                        Text('History: ${cardList[index].history}'),
-                      ],
-                    )
-                  : Text('English Word: ${cardList[index].engWord}'),
-            ),
-          ),
-          isAnswer
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => _onCheck(true),
-                      child: const Text("Correct Word"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => _onCheck(false),
-                      child: const Text("Wrong Word"),
-                    ),
-                  ],
-                )
-              : Container()
-        ],
-      ),
+      body: CardWidget(),
     );
   }
 }
