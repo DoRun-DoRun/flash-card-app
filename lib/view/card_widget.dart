@@ -29,11 +29,23 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
           )
         ],
         color: Colors.amber,
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(16),
         ),
       ),
-      child: Text("card"),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 32,
+          ),
+          const Text(
+            "data",
+            style: TextStyle(fontSize: 32),
+          ),
+          Image.asset('lib/assets/images/ImageSection.png')
+        ],
+      ),
     );
   }
 }

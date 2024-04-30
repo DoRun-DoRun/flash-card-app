@@ -51,7 +51,7 @@ class _MainPageState extends ConsumerState<MainPage> {
               icon: const Icon(Icons.settings))
         ],
       ),
-      body: CardWidget(),
+      body: const CardWidget(),
     );
   }
 }
