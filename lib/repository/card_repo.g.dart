@@ -1,24 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'card_repo.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$helloWorldHash() => r'8bbe6cff2b7b1f4e1f7be3d1820da793259f7bfc';
+String _$cardListHash() => r'b19c0ddde851aba680faca9ad0ab7038d14d7af5';
 
-/// See also [helloWorld].
-@ProviderFor(helloWorld)
-final helloWorldProvider = AutoDisposeProvider<String>.internal(
-  helloWorld,
-  name: r'helloWorldProvider',
+/// See also [CardList].
+@ProviderFor(CardList)
+final cardListProvider =
+    AutoDisposeNotifierProvider<CardList, List<WordCard>>.internal(
+  CardList.new,
+  name: r'cardListProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$helloWorldHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cardListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef HelloWorldRef = AutoDisposeProviderRef<String>;
+typedef _$CardList = AutoDisposeNotifier<List<WordCard>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
