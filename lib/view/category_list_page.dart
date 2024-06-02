@@ -1,7 +1,6 @@
 import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class CategoryListPage extends ConsumerWidget {
   final String? categoryName;

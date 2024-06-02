@@ -1,5 +1,8 @@
+import 'package:flash_card_app/model/card.dart';
 import 'package:flash_card_app/repository/card_repo.dart';
+import 'package:flash_card_app/view/card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,36 +14,17 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  bool isAnswer = false;
   int index = 0;
-
-  void _onTap() {
-    setState(() {
-      isAnswer = !isAnswer;
-    });
-  }
-
-  void _onCheck(bool isCorrect) {
-    ref.read(cardListProvider.notifier).editHistory(isCorrect, index);
-    final cardList = ref.read(cardListProvider);
-
-    setState(() {
-      isAnswer = !isAnswer;
-      if (index < cardList.length - 1) {
-        index++;
-      } else {
-        index = 0;
-      }
-    });
-  }
+  Direction _direction = Direction.none;
 
   @override
   Widget build(BuildContext context) {
     final cardList = ref.watch(cardListProvider);
+    final cardMethod = ref.read(cardListProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("main"),
+        // title: const Text("main"),
         actions: [
           IconButton(
               onPressed: () {
@@ -49,38 +33,35 @@ class _MainPageState extends ConsumerState<MainPage> {
               icon: const Icon(Icons.settings))
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: _onTap,
-            child: Center(
-              child: isAnswer
-                  ? Column(
-                      children: [
-                        Text('Korean Word: ${cardList[index].korWord}'),
-                        Text('History: ${cardList[index].history}'),
-                      ],
-                    )
-                  : Text('English Word: ${cardList[index].engWord}'),
-            ),
-          ),
-          isAnswer
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => _onCheck(true),
-                      child: const Text("Correct Word"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => _onCheck(false),
-                      child: const Text("Wrong Word"),
-                    ),
-                  ],
-                )
-              : Container()
-        ],
+      body: CardSwiper(
+        cardsCount: cardList.length,
+        isDisabled: !cardList[index].isToggle,
+        isLoop: false,
+        onTapDisabled: () {
+          cardMethod.toggleAnswer(index);
+        },
+        allowedSwipeDirection:
+            const AllowedSwipeDirection.symmetric(horizontal: true),
+        onSwipe: (oldIndex, currentIndex, direction) async {
+          cardMethod.editHistory(direction == CardSwiperDirection.right, index);
+          setState(() {
+            index++;
+          });
+          return true;
+        },
+        cardBuilder: (context, _, percentThresholdX, percentThresholdY) {
+          if (percentThresholdX > 0) {
+            _direction = Direction.right;
+            // print('카드가 오른쪽으로 스와이프 중입니다.');
+          } else if (percentThresholdX < 0) {
+            _direction = Direction.left;
+            // print('카드가 왼쪽으로 스와이프 중입니다.');
+          } else {
+            _direction = Direction.none;
+          }
+          // CardWidget 반환
+          return CardWidget(index: index, direction: _direction);
+        },
       ),
     );
   }
