@@ -12,8 +12,10 @@ class CardList extends _$CardList {
           category: data["category"],
           korWord: data["korWord"],
           engWord: data["engWord"],
+          displayWord: data["engWord"],
           image: data["image"],
           history: List<bool>.from(data["history"]),
+          isToggle: false,
         );
       }).toList();
 
@@ -41,11 +43,22 @@ class CardList extends _$CardList {
     if (wordCard.history.length > 5) {
       wordCard.history.removeAt(0);
     }
+    wordCard.isToggle = false;
 
-    // 업데이트된 WordCard 객체를 state에 반영합니다.
-    state = [
-      for (int i = 0; i < state.length; i++)
-        if (i == index) wordCard else state[i]
-    ];
+    state[index] = wordCard;
+  }
+
+  void toggleAnswer(int index) {
+    // state 리스트 복제
+    List<WordCard> newState = List.from(state);
+
+    // index에 해당하는 WordCard 객체의 isToggle 값 변경
+    newState[index].isToggle = !newState[index].isToggle;
+    newState[index].displayWord = newState[index].isToggle
+        ? newState[index].korWord
+        : newState[index].engWord;
+
+    // 새로운 리스트를 state에 할당하고 notifyListeners() 호출
+    state = newState;
   }
 }
