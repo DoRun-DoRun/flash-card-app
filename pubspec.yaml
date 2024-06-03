@@ -69,7 +69,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/assets/images/ImageSection.png
+    - lib/assets/fonts/
   #   - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: Jalnan
+      fonts:
+        - asset: lib/assets/fonts/Jalnan2.otf
+
+    - family: Jeju
+      fonts:
+        - asset: lib/assets/fonts/JejuGothicOTF.otf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

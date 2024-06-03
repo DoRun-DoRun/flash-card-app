@@ -57,7 +57,7 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
           ),
           Text(
             cardList[widget.index].displayWord,
-            style: const TextStyle(fontSize: 32),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
             height: 24,

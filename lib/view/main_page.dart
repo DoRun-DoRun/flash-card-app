@@ -56,20 +56,24 @@ class _MainPageState extends ConsumerState<MainPage> {
           Expanded(
             child: Stack(
               children: [
-                Center(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 60,
-                      ),
-                      const Text('오늘 단어를 다 봤어요!'),
-                      Image.asset(
-                        'lib/assets/images/ImageSection.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ],
+                if (index >= 4)
+                  Center(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Text(
+                          '오늘 단어를 다 봤어요!',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        Image.asset(
+                          'lib/assets/images/ImageSection.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                 if (index < 5)
                   CardSwiper(
                     cardsCount: cardList.length,
@@ -117,7 +121,9 @@ class _MainPageState extends ConsumerState<MainPage> {
                         cardMethod.shuffleCard();
                       });
                     },
-                    child: const Text("20단어 더보기"),
+                    child: const Text(
+                      "20단어 더보기",
+                    ),
                   ),
           )
         ],

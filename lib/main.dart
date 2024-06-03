@@ -18,6 +18,19 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+            fontFamily: 'Jalnan',
+            fontSize: 32,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: "Jeju",
+            fontSize: 18,
+            color: Color(0xFF666666),
+          ),
+        ),
+      ),
     );
   }
 }

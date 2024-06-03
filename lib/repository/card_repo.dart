@@ -44,6 +44,7 @@ class CardList extends _$CardList {
       wordCard.history.removeAt(0);
     }
     wordCard.isToggle = false;
+    wordCard.displayWord = wordCard.engWord;
 
     state[index] = wordCard;
   }
