@@ -61,4 +61,16 @@ class CardList extends _$CardList {
     // 새로운 리스트를 state에 할당하고 notifyListeners() 호출
     state = newState;
   }
+
+  String getHistory(int index) {
+    if (state[index].history.isEmpty) {
+      return "처음 보는 단어에요";
+    }
+
+    bool lastAnswer = state[index].history.last;
+    int count =
+        state[index].history.where((value) => value == lastAnswer).length;
+
+    return lastAnswer ? "이전에 $count번 맞춘 단어에요" : "이전에 $count번 틀린 단어에요";
+  }
 }
