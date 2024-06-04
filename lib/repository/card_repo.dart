@@ -79,4 +79,13 @@ class CardList extends _$CardList {
 
     return lastAnswer ? "최근에 $count번 맞춘 단어에요" : "이전에 $count번 틀린 단어에요";
   }
+
+  void resetHistory() {
+    List<WordCard> newState = List.from(state);
+    for (var wordCard in newState) {
+      wordCard.history = [];
+    }
+
+    state = newState;
+  }
 }
