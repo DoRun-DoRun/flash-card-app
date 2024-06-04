@@ -14,8 +14,9 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  int index = 0;
+  int _index = 0;
   Direction _direction = Direction.none;
+  final totalCount = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,10 @@ class _MainPageState extends ConsumerState<MainPage> {
               onPressed: () {
                 context.push('/category');
               },
-              icon: const Icon(Icons.settings))
+              icon: const Icon(
+                Icons.settings,
+                size: 32,
+              ))
         ],
       ),
       body: Column(
@@ -49,9 +53,9 @@ class _MainPageState extends ConsumerState<MainPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('$index/20'),
+                Text('$_index/$totalCount'),
                 LinearProgressIndicator(
-                  value: index / 20,
+                  value: _index / totalCount,
                   color: const Color(0XFF72C083),
                   backgroundColor: Colors.white,
                   minHeight: 8,
@@ -63,54 +67,66 @@ class _MainPageState extends ConsumerState<MainPage> {
           Expanded(
             child: Stack(
               children: [
-                if (index >= 4)
+                if (_index >= totalCount - 1)
                   Center(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text(
-                          '오늘 단어를 다 봤어요!',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        Image.asset(
-                          'lib/assets/images/ImageSection.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            '오늘 단어를 다 봤어요!',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          Expanded(
+                            child: Image.asset(
+                              'lib/assets/images/ImageSection.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                if (index < 5)
+                if (_index < totalCount)
                   CardSwiper(
                     cardsCount: cardList.length,
-                    isDisabled: !cardList[index].isToggle,
+                    isDisabled: !cardList[_index].isToggle,
+                    scale: 0.9,
                     isLoop: false,
                     onTapDisabled: () {
-                      cardMethod.toggleAnswer(index);
+                      cardMethod.toggleAnswer(_index);
                     },
+                    numberOfCardsDisplayed: () {
+                      if (_index == totalCount - 1) {
+                        return 1;
+                      }
+                      if (_index == totalCount - 2) {
+                        return 2;
+                      }
+                      return 3;
+                    }(),
                     allowedSwipeDirection:
                         const AllowedSwipeDirection.symmetric(horizontal: true),
-                    onSwipe: (oldIndex, currentIndex, direction) async {
+                    onSwipe: (oldIndex, currentIndex, direction) {
                       cardMethod.editHistory(
-                          direction == CardSwiperDirection.right, index);
+                          direction == CardSwiperDirection.right, _index);
                       setState(() {
-                        index++;
+                        _index++;
                       });
                       return true;
                     },
                     cardBuilder:
-                        (context, _, percentThresholdX, percentThresholdY) {
-                      if (percentThresholdX > 0) {
-                        _direction = Direction.right;
-                        // print('카드가 오른쪽으로 스와이프 중입니다.');
-                      } else if (percentThresholdX < 0) {
-                        _direction = Direction.left;
-                        // print('카드가 왼쪽으로 스와이프 중입니다.');
-                      } else {
-                        _direction = Direction.none;
+                        (context, index, percentThresholdX, percentThresholdY) {
+                      switch (percentThresholdX.sign.toInt()) {
+                        case 1:
+                          _direction = Direction.right;
+                          break;
+                        case -1:
+                          _direction = Direction.left;
+                          break;
+                        default:
+                          _direction = Direction.none;
                       }
-                      // CardWidget 반환
                       return CardWidget(index: index, direction: _direction);
                     },
                   ),
@@ -119,18 +135,19 @@ class _MainPageState extends ConsumerState<MainPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 32),
-            child: index < 5
-                ? Text(cardMethod.getHistory(index))
+            child: _index < totalCount
+                ? Text(cardMethod.getHistory(_index))
                 : GestureDetector(
                     onTap: () {
                       setState(() {
-                        index = 0;
+                        _index = 0;
                         cardMethod.shuffleCard();
                       });
                     },
-                    child: const Text(
-                      "20단어 더보기",
-                      style: TextStyle(decoration: TextDecoration.underline),
+                    child: Text(
+                      "$totalCount단어 더보기",
+                      style:
+                          const TextStyle(decoration: TextDecoration.underline),
                     ),
                   ),
           )
