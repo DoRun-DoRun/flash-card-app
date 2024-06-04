@@ -1,6 +1,7 @@
 import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoryListPage extends ConsumerWidget {
   final String? categoryName;
@@ -14,8 +15,16 @@ class CategoryListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryName.toString()),
-      ),
+          title: Text(categoryName.toString()),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                context.pop();
+              },
+            ),
+          ]),
       body: ListView.builder(
           itemCount: wordCardList.length,
           itemBuilder: (context, index) {
