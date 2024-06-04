@@ -1,3 +1,4 @@
+import 'package:flash_card_app/model/card.dart';
 import 'package:flash_card_app/model/category.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +36,7 @@ class CategoryWidget extends StatelessWidget {
               color: const Color(0xff444444),
             ),
             const SizedBox(
-              height: 4,
+              height: 8,
             ),
             Text(
               wordCard.korean,
@@ -46,6 +47,75 @@ class CategoryWidget extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CategoryListWidget extends StatelessWidget {
+  const CategoryListWidget({
+    super.key,
+    required this.wordCard,
+  });
+
+  final WordCard wordCard;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          width: 1.5,
+          color: const Color(0xFFD9D9D9),
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                wordCard.korWord,
+                style: const TextStyle(fontSize: 20, color: Colors.black),
+              ),
+              Text(
+                wordCard.engWord,
+                style: const TextStyle(fontSize: 16, color: Color(0xFFCCCCCC)),
+              ),
+            ],
+          ),
+          Row(
+            children: List.generate(5, (index) {
+              Color color;
+
+              if (index < wordCard.history.length) {
+                if (wordCard.history[index]) {
+                  color = const Color(0xFFC9E7D0);
+                } else {
+                  color = const Color(0xFFF2CACA);
+                }
+              } else {
+                color = Colors.white;
+              }
+
+              return Container(
+                width: 20,
+                height: 20,
+                margin: const EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
+                    color: color,
+                    border: Border.all(color: const Color(0xFFAAAAAA)),
+                    borderRadius: BorderRadius.circular(4)),
+              );
+            }),
+          )
+          // Text(wordCard.history.toString())
+        ],
       ),
     );
   }

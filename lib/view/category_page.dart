@@ -1,6 +1,7 @@
 import 'package:flash_card_app/repository/category_repo.dart';
 import 'package:flash_card_app/view/category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,8 +13,17 @@ class CategoryPage extends ConsumerWidget {
     final categoryList = ref.watch(allCategoriesProvider);
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F8F8),
       appBar: AppBar(
-          // title: const Text("Category"),
+          backgroundColor: const Color(0xFFF8F8F8),
+          title: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              '카테고리',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          centerTitle: false,
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -28,13 +38,6 @@ class CategoryPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '카테고리',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(
-              height: 32,
-            ),
             Expanded(
               child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -51,11 +54,16 @@ class CategoryPage extends ConsumerWidget {
             const SizedBox(
               height: 48,
             ),
-            const Center(
-              child: Text(
-                "단어 기록 초기화",
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
+            GestureDetector(
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Text(
+                    "단어 기록 초기화",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ),
             ),

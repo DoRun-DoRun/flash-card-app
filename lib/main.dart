@@ -20,8 +20,14 @@ class MyApp extends ConsumerWidget {
       routerConfig: router,
       theme: ThemeData(
         textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            fontFamily: 'Jalnan',
+            fontSize: 20,
+            color: Colors.black,
+          ),
           bodyLarge: TextStyle(
             fontFamily: 'Jalnan',
+            color: Colors.black,
             fontSize: 32,
           ),
           bodyMedium: TextStyle(

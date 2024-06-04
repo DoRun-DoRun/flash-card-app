@@ -26,7 +26,14 @@ class _MainPageState extends ConsumerState<MainPage> {
       backgroundColor: const Color(0xFFF8F8F8),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F8F8),
-        // title: const Text("main"),
+        title: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Text(
+            "나만의 단어집",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ),
+        centerTitle: false,
         actions: [
           IconButton(
               onPressed: () {
@@ -111,11 +118,11 @@ class _MainPageState extends ConsumerState<MainPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.only(bottom: 32),
             child: index < 5
                 ? Text(cardMethod.getHistory(index))
-                : ElevatedButton(
-                    onPressed: () {
+                : GestureDetector(
+                    onTap: () {
                       setState(() {
                         index = 0;
                         cardMethod.shuffleCard();
@@ -123,6 +130,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                     },
                     child: const Text(
                       "20단어 더보기",
+                      style: TextStyle(decoration: TextDecoration.underline),
                     ),
                   ),
           )

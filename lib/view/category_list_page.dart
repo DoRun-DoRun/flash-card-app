@@ -1,4 +1,5 @@
 import 'package:flash_card_app/repository/card_repo.dart';
+import 'package:flash_card_app/view/category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,9 +15,18 @@ class CategoryListPage extends ConsumerWidget {
         ref.read(cardListProvider.notifier).filterByCategory(categoryName);
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F8F8),
       appBar: AppBar(
-          title: Text(categoryName.toString()),
+          backgroundColor: const Color(0xFFF8F8F8),
+          title: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              categoryName.toString(),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
           automaticallyImplyLeading: false,
+          centerTitle: false,
           actions: [
             IconButton(
               icon: const Icon(Icons.arrow_back),
@@ -25,21 +35,15 @@ class CategoryListPage extends ConsumerWidget {
               },
             ),
           ]),
-      body: ListView.builder(
-          itemCount: wordCardList.length,
-          itemBuilder: (context, index) {
-            final wordCard = wordCardList[index];
-            return ListTile(
-              title: Text(wordCard.korWord),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(wordCard.engWord),
-                  Text(wordCard.history.toString())
-                ],
-              ),
-            );
-          }),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+            itemCount: wordCardList.length,
+            itemBuilder: (context, index) {
+              final wordCard = wordCardList[index];
+              return CategoryListWidget(wordCard: wordCard);
+            }),
+      ),
     );
   }
 }
