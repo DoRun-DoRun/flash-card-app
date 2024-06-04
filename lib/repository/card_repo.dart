@@ -21,7 +21,7 @@ class CardList extends _$CardList {
 
   List<WordCard> filterByCategory(String? category) {
     // state의 WordCard 리스트에서 주어진 카테고리와 일치하는 객체만 필터링하여 반환
-    return state.where((card) => card.category.english == category).toList();
+    return state.where((card) => card.category.korean == category).toList();
   }
 
   void shuffleCard() {
@@ -72,6 +72,6 @@ class CardList extends _$CardList {
     int count =
         state[index].history.where((value) => value == lastAnswer).length;
 
-    return lastAnswer ? "이전에 $count번 맞춘 단어에요" : "이전에 $count번 틀린 단어에요";
+    return lastAnswer ? "최근에 $count번 맞춘 단어에요" : "이전에 $count번 틀린 단어에요";
   }
 }

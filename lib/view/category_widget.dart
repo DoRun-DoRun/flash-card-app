@@ -15,7 +15,7 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/category/${wordCard.english}');
+        context.push('/category/${wordCard.korean}');
       },
       child: Container(
         decoration: BoxDecoration(

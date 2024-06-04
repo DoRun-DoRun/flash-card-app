@@ -21,7 +21,6 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
     final cardList = ref.watch(cardListProvider);
     double screenHeight = MediaQuery.of(context).size.height;
     double percentageHeight = 0.7;
-    // 계산된 높이
     double height = screenHeight * percentageHeight;
 
     return Container(
@@ -49,27 +48,25 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
           Radius.circular(16),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 32,
-          ),
-          Text(
-            cardList[widget.index].displayWord,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(32),
-            child: Image.asset(
-              'lib/assets/images/ImageSection.png',
-              fit: BoxFit.cover,
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          children: [
+            Text(
+              cardList[widget.index].displayWord,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-          )
-        ],
+            const SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: Image.network(
+                cardList[widget.index].image,
+                fit: BoxFit.contain,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

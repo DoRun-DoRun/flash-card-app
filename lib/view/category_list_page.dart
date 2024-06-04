@@ -29,7 +29,10 @@ class CategoryListPage extends ConsumerWidget {
           centerTitle: false,
           actions: [
             IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 32,
+              ),
               onPressed: () {
                 context.pop();
               },

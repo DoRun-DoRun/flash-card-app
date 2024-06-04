@@ -27,7 +27,10 @@ class CategoryPage extends ConsumerWidget {
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 32,
+              ),
               onPressed: () {
                 context.pop();
               },
