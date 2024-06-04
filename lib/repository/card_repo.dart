@@ -24,6 +24,11 @@ class CardList extends _$CardList {
     return state.where((card) => card.category.korean == category).toList();
   }
 
+  int getIndex(WordCard word) {
+    // state의 WordCard 리스트에서 주어진 카테고리와 일치하는 객체만 필터링하여 반환
+    return state.indexOf(word);
+  }
+
   void shuffleCard() {
     // 상태(`state`)를 복사하여 리스트를 임의로 섞습니다.
     final shuffledWordData = state;
