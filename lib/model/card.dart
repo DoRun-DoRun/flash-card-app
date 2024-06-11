@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flash_card_app/model/category.dart';
 
 class WordCard {
@@ -19,6 +21,34 @@ class WordCard {
     required this.history,
     required this.isToggle,
   });
+
+  // JSON으로 변환
+  Map<String, dynamic> toJson() => {
+        'category': category.toJson(),
+        'korWord': korWord,
+        'engWord': engWord,
+        'displayWord': displayWord,
+        'image': image,
+        'history': history,
+        'isToggle': isToggle,
+      };
+
+  // JSON에서 객체 생성
+  factory WordCard.fromJson(Map<String, dynamic> json) => WordCard(
+        category: CategoryCode.fromJson(json['category']),
+        korWord: json['korWord'],
+        engWord: json['engWord'],
+        displayWord: json['displayWord'],
+        image: json['image'],
+        history: List<bool>.from(json['history']),
+        isToggle: json['isToggle'],
+      );
+
+  static List<WordCard> fromJsonList(List<String> jsonList) {
+    return jsonList
+        .map((jsonString) => WordCard.fromJson(jsonDecode(jsonString)))
+        .toList();
+  }
 }
 
 enum Direction { right, left, none }

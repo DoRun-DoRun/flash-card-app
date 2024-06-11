@@ -17,4 +17,17 @@ enum CategoryCode {
   final String english;
   final IconData icon;
   const CategoryCode(this.korean, this.english, this.icon);
+
+  // JSON으로 직렬화
+  Map<String, dynamic> toJson() => {
+        'korean': korean,
+        'english': english,
+        'icon': icon.codePoint,
+      };
+
+  // JSON에서 역직렬화
+  static CategoryCode fromJson(Map<String, dynamic> json) {
+    return CategoryCode.values.firstWhere(
+        (e) => e.korean == json['korean'] && e.english == json['english']);
+  }
 }

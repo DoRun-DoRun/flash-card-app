@@ -20,7 +20,7 @@ class _MainPageState extends ConsumerState<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cardList = ref.watch(cardListProvider);
+    final aysncState = ref.watch(cardListProvider);
     final cardMethod = ref.read(cardListProvider.notifier);
 
     return Scaffold(
@@ -46,112 +46,122 @@ class _MainPageState extends ConsumerState<MainPage> {
               ))
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('$_index/$totalCount'),
-                LinearProgressIndicator(
-                  value: _index / totalCount,
-                  color: const Color(0XFF72C083),
-                  backgroundColor: Colors.white,
-                  minHeight: 8,
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+      body: aysncState.when(
+        data: (cardList) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text('$_index/$totalCount'),
+                    LinearProgressIndicator(
+                      value: _index / totalCount,
+                      color: const Color(0XFF72C083),
+                      backgroundColor: Colors.white,
+                      minHeight: 8,
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                if (_index >= totalCount - 1)
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            '오늘 단어를 다 봤어요!',
-                            style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    if (_index >= totalCount - 1)
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(40.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                '오늘 단어를 다 봤어요!',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              Expanded(
+                                child: Image.asset(
+                                  'lib/assets/images/ImageSection.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Image.asset(
-                              'lib/assets/images/ImageSection.png',
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                if (_index < totalCount)
-                  CardSwiper(
-                    cardsCount: cardList.length,
-                    isDisabled: !cardList[_index].isToggle,
-                    scale: 0.9,
-                    isLoop: false,
-                    onTapDisabled: () {
-                      cardMethod.toggleAnswer(_index);
-                    },
-                    numberOfCardsDisplayed: () {
-                      if (_index == totalCount - 1) {
-                        return 1;
-                      }
-                      if (_index == totalCount - 2) {
-                        return 2;
-                      }
-                      return 3;
-                    }(),
-                    allowedSwipeDirection:
-                        const AllowedSwipeDirection.symmetric(horizontal: true),
-                    onSwipe: (oldIndex, currentIndex, direction) {
-                      cardMethod.editHistory(
-                          direction == CardSwiperDirection.right, _index);
-                      setState(() {
-                        _index++;
-                      });
-                      return true;
-                    },
-                    cardBuilder:
-                        (context, index, percentThresholdX, percentThresholdY) {
-                      switch (percentThresholdX.sign.toInt()) {
-                        case 1:
-                          _direction = Direction.right;
-                          break;
-                        case -1:
-                          _direction = Direction.left;
-                          break;
-                        default:
-                          _direction = Direction.none;
-                      }
-                      return CardWidget(index: index, direction: _direction);
-                    },
-                  ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 32),
-            child: _index < totalCount
-                ? Text(cardMethod.getHistory(_index))
-                : GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _index = 0;
-                        cardMethod.shuffleCard();
-                      });
-                    },
-                    child: Text(
-                      "$totalCount단어 더보기",
-                      style:
-                          const TextStyle(decoration: TextDecoration.underline),
-                    ),
-                  ),
-          )
-        ],
+                    if (_index < totalCount)
+                      CardSwiper(
+                        cardsCount: cardList.length,
+                        isDisabled: !cardList[_index].isToggle,
+                        scale: 0.9,
+                        isLoop: false,
+                        onTapDisabled: () {
+                          cardMethod.toggleAnswer(_index);
+                        },
+                        numberOfCardsDisplayed: () {
+                          if (_index == totalCount - 1) {
+                            return 1;
+                          }
+                          if (_index == totalCount - 2) {
+                            return 2;
+                          }
+                          return 3;
+                        }(),
+                        allowedSwipeDirection:
+                            const AllowedSwipeDirection.symmetric(
+                                horizontal: true),
+                        onSwipe: (oldIndex, currentIndex, direction) {
+                          cardMethod.editHistory(
+                              direction == CardSwiperDirection.right, _index);
+                          setState(() {
+                            _index++;
+                          });
+                          return true;
+                        },
+                        cardBuilder: (context, index, percentThresholdX,
+                            percentThresholdY) {
+                          switch (percentThresholdX.sign.toInt()) {
+                            case 1:
+                              _direction = Direction.right;
+                              break;
+                            case -1:
+                              _direction = Direction.left;
+                              break;
+                            default:
+                              _direction = Direction.none;
+                          }
+                          return CardWidget(
+                              index: index, direction: _direction);
+                        },
+                      ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 32),
+                child: _index < totalCount
+                    ? Text(cardMethod.getHistory(_index))
+                    : GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _index = 0;
+                            cardMethod.shuffleCard();
+                          });
+                        },
+                        child: Text(
+                          "$totalCount단어 더보기",
+                          style: const TextStyle(
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+              )
+            ],
+          );
+        },
+        error: (err, stack) => Text(err.toString()),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

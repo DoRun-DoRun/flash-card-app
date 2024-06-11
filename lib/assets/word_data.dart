@@ -376,7 +376,7 @@ List<Map<String, dynamic>> wordData = [
     "korWord": "스마트폰",
     "engWord": "Smartphone",
     "image":
-        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjz4eicELxiclJtjqfVAPQjUWPrsp2R7ZvSHJyDYpATnC1G2hNuMn2VD-5D5rn5avNT8ivAa-QPC6lxuEZ_lyDiA7Te_iWA88rlqKmiGKnDcX4ACOScZadyLLlr6payCJDZ9X2Vx379FtG/w1200-h630-p-k-no-nu/smartphone.png",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhg8VCG4utSW6fjOh1KgTRFMS8acgiTnqzhr_vBPL7cgYYWlrOvdflPZ0gbjm7iMFE48jopjNPtYx8J3yz3O31TOLvSV8lbquW0tFWixwa27pAkNNJuHuKANSTF2aARvksBM0R2LKm5MiOJ/s800/computer_smartphone1_icon.png",
     "history": []
   },
   {
