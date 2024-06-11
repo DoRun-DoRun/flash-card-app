@@ -56,6 +56,15 @@ class CardList extends _$CardList {
     state = shuffledWordData;
   }
 
+  void setTutorial(int index) {
+    final wordCard = state[index];
+
+    wordCard.isToggle = false;
+    wordCard.displayWord = wordCard.engWord;
+
+    state[index] = wordCard;
+  }
+
   void editHistory(bool isCorrect, int index) async {
     final wordCard = state[index];
     wordCard.history.add(isCorrect);

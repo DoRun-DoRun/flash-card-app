@@ -107,10 +107,13 @@ class _MainPageState extends ConsumerState<MainPage> {
                       }(),
                       allowedSwipeDirection:
                           const AllowedSwipeDirection.symmetric(
-                              horizontal: true),
+                        horizontal: true,
+                      ),
                       onSwipe: (oldIndex, currentIndex, direction) {
                         cardMethod.editHistory(
-                            direction == CardSwiperDirection.right, _index);
+                          direction == CardSwiperDirection.right,
+                          _index,
+                        );
                         setState(() {
                           _index++;
                         });

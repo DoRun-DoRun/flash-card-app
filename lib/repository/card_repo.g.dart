@@ -6,7 +6,7 @@ part of 'card_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cardListHash() => r'36af69d4da40bfe301114fcfa548ae77da1fe532';
+String _$cardListHash() => r'4af5e6558e2bd24368c56eb587db5af140c9a8e8';
 
 /// See also [CardList].
 @ProviderFor(CardList)
