@@ -10,27 +10,16 @@ part 'card_repo.g.dart';
 @riverpod
 class CardList extends _$CardList {
   @override
-  Future<List<WordCard>> build() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<WordCard>? localWordCards;
-    List<String>? wordDataJson = prefs.getStringList('wordData');
-
-    if (wordDataJson != null) {
-      localWordCards = WordCard.fromJsonList(wordDataJson);
-    }
-
+  List<WordCard> build() {
     final List<WordCard> wordCards = wordData.map((data) {
       return WordCard(
+        id: data["id"],
         category: data["category"],
         korWord: data["korWord"],
         engWord: data["engWord"],
         displayWord: data["engWord"],
         image: data["image"],
-        history: localWordCards != null
-            ? localWordCards
-                .firstWhere((card) => card.engWord == data["engWord"])
-                .history
-            : List<bool>.from(data["history"]),
+        history: List<bool>.from(data["history"]),
         isToggle: false,
       );
     }).toList();
@@ -39,28 +28,36 @@ class CardList extends _$CardList {
     return wordCards;
   }
 
+  Future<void> setHistory() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    for (var wordCard in state) {
+      final historyString = prefs.getString(wordCard.id.toString());
+      if (historyString != null) {
+        final dynamic decodedJson = jsonDecode(historyString);
+        if (decodedJson is List) {
+          wordCard.history = decodedJson.cast<bool>();
+        }
+      }
+    }
+  }
+
   List<WordCard> filterByCategory(String? category) {
-    final currentState = state.asData?.value ?? [];
-    return currentState
-        .where((card) => card.category.korean == category)
-        .toList();
+    return state.where((card) => card.category.korean == category).toList();
   }
 
   int getIndex(WordCard word) {
-    final currentState = state.asData?.value ?? [];
-    return currentState.indexOf(word);
+    return state.indexOf(word);
   }
 
-  Future<void> shuffleCard() async {
-    final currentState = state.asData?.value ?? [];
-    final shuffledWordData = List<WordCard>.from(currentState);
+  void shuffleCard() {
+    List<WordCard> shuffledWordData = state;
     shuffledWordData.shuffle();
-    state = AsyncValue.data(shuffledWordData);
+    state = shuffledWordData;
   }
 
-  Future<void> editHistory(bool isCorrect, int index) async {
-    final currentState = state.asData?.value ?? [];
-    final wordCard = currentState[index];
+  void editHistory(bool isCorrect, int index) async {
+    final wordCard = state[index];
     wordCard.history.add(isCorrect);
 
     if (wordCard.history.length > 5) {
@@ -69,57 +66,55 @@ class CardList extends _$CardList {
     wordCard.isToggle = false;
     wordCard.displayWord = wordCard.engWord;
 
-    final newState = List<WordCard>.from(currentState);
-    newState[index] = wordCard;
-    state = AsyncValue.data(newState);
+    state[index] = wordCard;
     // 상태를 SharedPreferences에 저장
-    await _saveWordData(newState);
+    await _saveWordData(wordCard);
   }
 
-  Future<void> _saveWordData(List<WordCard> wordData) async {
+  Future<void> _saveWordData(WordCard wordCard) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    final List<String> wordDataJson =
-        wordData.map((wordCard) => jsonEncode(wordCard.toJson())).toList();
-    // print(wordDataJson.length);
-    prefs.setStringList('wordData', wordDataJson);
+    String jsonString = jsonEncode(wordCard.history);
+    await prefs.setString(wordCard.id.toString(), jsonString);
   }
 
-  Future<void> toggleAnswer(int index) async {
-    final currentState = state.asData?.value ?? [];
-    final newState = List<WordCard>.from(currentState);
+  void toggleAnswer(int index) {
+    List<WordCard> newState = List.from(state);
 
     newState[index].isToggle = !newState[index].isToggle;
     newState[index].displayWord = newState[index].isToggle
         ? newState[index].korWord
         : newState[index].engWord;
 
-    state = AsyncValue.data(newState);
+    state = newState;
   }
 
   String getHistory(int index) {
-    final currentState = state.asData?.value ?? [];
-    if (currentState[index].history.isEmpty) {
+    if (state[index].history.isEmpty) {
       return "처음 보는 단어에요";
     }
 
-    bool lastAnswer = currentState[index].history.last;
-    int count = currentState[index]
-        .history
-        .where((value) => value == lastAnswer)
-        .length;
+    bool lastAnswer = state[index].history.last;
+    int count =
+        state[index].history.where((value) => value == lastAnswer).length;
 
     return lastAnswer ? "최근에 $count번 맞춘 단어에요" : "이전에 $count번 틀린 단어에요";
   }
 
-  Future<void> resetHistory() async {
-    final currentState = state.asData?.value ?? [];
-    final newState = List<WordCard>.from(currentState);
+  void resetHistory() async {
+    List<WordCard> newState = List.from(state);
     for (var wordCard in newState) {
       wordCard.history = [];
     }
 
-    state = AsyncValue.data(newState);
-    await _saveWordData(newState);
+    state = newState;
+    await _resetWordData();
+  }
+
+  Future<void> _resetWordData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    for (var wordCard in state) {
+      prefs.remove(wordCard.id.toString());
+    }
   }
 }

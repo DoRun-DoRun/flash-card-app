@@ -1,3 +1,4 @@
+import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flash_card_app/utill/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,10 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final cardMethod = ref.read(cardListProvider.notifier);
+
+    cardMethod.setHistory();
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: router,

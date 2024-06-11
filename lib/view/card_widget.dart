@@ -18,62 +18,57 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final aysncState = ref.watch(cardListProvider);
+    final cardList = ref.watch(cardListProvider);
 
     double screenHeight = MediaQuery.of(context).size.height;
     double percentageHeight = 0.7;
     double height = screenHeight * percentageHeight;
 
-    return aysncState.when(
-        data: (cardList) {
-          return Container(
-            width: double.infinity,
-            height: height,
-            margin: const EdgeInsets.only(
-              bottom: 54,
-              right: 16,
-              left: 16,
+    return Container(
+      width: double.infinity,
+      height: height,
+      margin: const EdgeInsets.only(
+        bottom: 54,
+        right: 16,
+        left: 16,
+      ),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurRadius: 12,
+            offset: const Offset(12, 12),
+          )
+        ],
+        color: widget.direction == Direction.right
+            ? const Color(0xFFc9e7d0)
+            : widget.direction == Direction.left
+                ? const Color(0xFFF2CACA)
+                : Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(16),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          children: [
+            Text(
+              cardList[widget.index].displayWord,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.25),
-                  blurRadius: 12,
-                  offset: const Offset(12, 12),
-                )
-              ],
-              color: widget.direction == Direction.right
-                  ? const Color(0xFFc9e7d0)
-                  : widget.direction == Direction.left
-                      ? const Color(0xFFF2CACA)
-                      : Colors.white,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(16),
+            const SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: Image.network(
+                cardList[widget.index].image,
+                fit: BoxFit.contain,
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Column(
-                children: [
-                  Text(
-                    cardList[widget.index].displayWord,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Expanded(
-                    child: Image.network(
-                      cardList[widget.index].image,
-                      fit: BoxFit.contain,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-        error: (err, stack) => Text(err.toString()),
-        loading: () => const Center(child: CircularProgressIndicator()));
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

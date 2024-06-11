@@ -1,9 +1,7 @@
 import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flash_card_app/repository/category_repo.dart';
 import 'package:flash_card_app/view/category_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 

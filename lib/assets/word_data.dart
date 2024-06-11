@@ -3,6 +3,7 @@ import 'package:flash_card_app/model/category.dart';
 List<Map<String, dynamic>> wordData = [
   // Animal
   {
+    "id": 100000,
     "category": CategoryCode.animal,
     "korWord": "고양이",
     "engWord": "Cat",
@@ -11,6 +12,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100001,
     "category": CategoryCode.animal,
     "korWord": "강아지",
     "engWord": "Dog",
@@ -19,6 +21,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100002,
     "category": CategoryCode.animal,
     "korWord": "코끼리",
     "engWord": "Elephant",
@@ -27,6 +30,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100003,
     "category": CategoryCode.animal,
     "korWord": "호랑이",
     "engWord": "Tiger",
@@ -35,6 +39,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100004,
     "category": CategoryCode.animal,
     "korWord": "사자",
     "engWord": "Lion",
@@ -44,6 +49,7 @@ List<Map<String, dynamic>> wordData = [
   },
   // Plant
   {
+    "id": 100100,
     "category": CategoryCode.plant,
     "korWord": "나무",
     "engWord": "Tree",
@@ -52,6 +58,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100101,
     "category": CategoryCode.plant,
     "korWord": "꽃",
     "engWord": "Flower",
@@ -60,6 +67,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100102,
     "category": CategoryCode.plant,
     "korWord": "풀",
     "engWord": "Grass",
@@ -68,6 +76,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100103,
     "category": CategoryCode.plant,
     "korWord": "선인장",
     "engWord": "Cactus",
@@ -76,6 +85,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100104,
     "category": CategoryCode.plant,
     "korWord": "이끼",
     "engWord": "Moss",
@@ -85,6 +95,7 @@ List<Map<String, dynamic>> wordData = [
   },
   // Food
   {
+    "id": 100200,
     "category": CategoryCode.food,
     "korWord": "사과",
     "engWord": "Apple",
@@ -93,6 +104,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100201,
     "category": CategoryCode.food,
     "korWord": "바나나",
     "engWord": "Banana",
@@ -101,6 +113,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100202,
     "category": CategoryCode.food,
     "korWord": "치즈",
     "engWord": "Cheese",
@@ -109,6 +122,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100203,
     "category": CategoryCode.food,
     "korWord": "빵",
     "engWord": "Bread",
@@ -117,6 +131,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100204,
     "category": CategoryCode.food,
     "korWord": "피자",
     "engWord": "Pizza",
@@ -126,6 +141,7 @@ List<Map<String, dynamic>> wordData = [
   },
   // Occupation
   {
+    "id": 100300,
     "category": CategoryCode.occupation,
     "korWord": "의사",
     "engWord": "Doctor",
@@ -134,6 +150,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100301,
     "category": CategoryCode.occupation,
     "korWord": "선생님",
     "engWord": "Teacher",
@@ -142,6 +159,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100302,
     "category": CategoryCode.occupation,
     "korWord": "경찰관",
     "engWord": "Police Officer",
@@ -150,6 +168,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100303,
     "category": CategoryCode.occupation,
     "korWord": "소방관",
     "engWord": "Firefighter",
@@ -158,6 +177,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100304,
     "category": CategoryCode.occupation,
     "korWord": "요리사",
     "engWord": "Chef",
@@ -167,6 +187,7 @@ List<Map<String, dynamic>> wordData = [
   },
   // Nature
   {
+    "id": 100400,
     "category": CategoryCode.nature,
     "korWord": "산",
     "engWord": "Mountain",
@@ -175,6 +196,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100401,
     "category": CategoryCode.nature,
     "korWord": "바다",
     "engWord": "Ocean",
@@ -183,6 +205,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100402,
     "category": CategoryCode.nature,
     "korWord": "강",
     "engWord": "River",
@@ -191,6 +214,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100403,
     "category": CategoryCode.nature,
     "korWord": "하늘",
     "engWord": "Sky",
@@ -199,6 +223,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100404,
     "category": CategoryCode.nature,
     "korWord": "숲",
     "engWord": "Forest",
@@ -208,6 +233,7 @@ List<Map<String, dynamic>> wordData = [
   },
   // Transportation
   {
+    "id": 100500,
     "category": CategoryCode.transportation,
     "korWord": "자동차",
     "engWord": "Car",
@@ -216,6 +242,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100501,
     "category": CategoryCode.transportation,
     "korWord": "버스",
     "engWord": "Bus",
@@ -224,6 +251,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100502,
     "category": CategoryCode.transportation,
     "korWord": "기차",
     "engWord": "Train",
@@ -232,6 +260,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100503,
     "category": CategoryCode.transportation,
     "korWord": "비행기",
     "engWord": "Airplane",
@@ -240,6 +269,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100504,
     "category": CategoryCode.transportation,
     "korWord": "자전거",
     "engWord": "Bicycle",
@@ -249,6 +279,7 @@ List<Map<String, dynamic>> wordData = [
   },
   // Family
   {
+    "id": 100600,
     "category": CategoryCode.family,
     "korWord": "아버지",
     "engWord": "Father",
@@ -257,6 +288,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100601,
     "category": CategoryCode.family,
     "korWord": "어머니",
     "engWord": "Mother",
@@ -265,6 +297,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100602,
     "category": CategoryCode.family,
     "korWord": "형제",
     "engWord": "Brother",
@@ -273,6 +306,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100603,
     "category": CategoryCode.family,
     "korWord": "자매",
     "engWord": "Sister",
@@ -281,6 +315,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100604,
     "category": CategoryCode.family,
     "korWord": "할머니",
     "engWord": "Grandmother",
@@ -290,6 +325,7 @@ List<Map<String, dynamic>> wordData = [
   },
   //activity
   {
+    "id": 100700,
     "category": CategoryCode.activity,
     "korWord": "수영",
     "engWord": "Swimming",
@@ -298,6 +334,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100701,
     "category": CategoryCode.activity,
     "korWord": "등산",
     "engWord": "Hiking",
@@ -306,6 +343,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100702,
     "category": CategoryCode.activity,
     "korWord": "달리기",
     "engWord": "Running",
@@ -314,6 +352,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100703,
     "category": CategoryCode.activity,
     "korWord": "요가",
     "engWord": "Yoga",
@@ -322,6 +361,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100704,
     "category": CategoryCode.activity,
     "korWord": "축구",
     "engWord": "Soccer",
@@ -331,6 +371,7 @@ List<Map<String, dynamic>> wordData = [
   },
   //culture
   {
+    "id": 100800,
     "category": CategoryCode.culture,
     "korWord": "영화",
     "engWord": "Movie",
@@ -339,6 +380,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100801,
     "category": CategoryCode.culture,
     "korWord": "음악",
     "engWord": "Music",
@@ -347,6 +389,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100802,
     "category": CategoryCode.culture,
     "korWord": "예술",
     "engWord": "Art",
@@ -355,6 +398,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100803,
     "category": CategoryCode.culture,
     "korWord": "공연",
     "engWord": "Performance",
@@ -363,6 +407,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100804,
     "category": CategoryCode.culture,
     "korWord": "축제",
     "engWord": "Festival",
@@ -372,6 +417,7 @@ List<Map<String, dynamic>> wordData = [
   },
   //electronics
   {
+    "id": 100900,
     "category": CategoryCode.electronics,
     "korWord": "스마트폰",
     "engWord": "Smartphone",
@@ -380,6 +426,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100901,
     "category": CategoryCode.electronics,
     "korWord": "노트북",
     "engWord": "Laptop",
@@ -388,6 +435,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100902,
     "category": CategoryCode.electronics,
     "korWord": "태블릿",
     "engWord": "Tablet",
@@ -396,6 +444,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100903,
     "category": CategoryCode.electronics,
     "korWord": "텔레비전",
     "engWord": "Television",
@@ -404,6 +453,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 100904,
     "category": CategoryCode.electronics,
     "korWord": "스피커",
     "engWord": "Speaker",
@@ -413,6 +463,7 @@ List<Map<String, dynamic>> wordData = [
   },
   //emotion
   {
+    "id": 101000,
     "category": CategoryCode.emotion,
     "korWord": "기쁨",
     "engWord": "Joy",
@@ -421,6 +472,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 101001,
     "category": CategoryCode.emotion,
     "korWord": "슬픔",
     "engWord": "Sadness",
@@ -429,6 +481,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 101002,
     "category": CategoryCode.emotion,
     "korWord": "분노",
     "engWord": "Anger",
@@ -437,6 +490,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 101003,
     "category": CategoryCode.emotion,
     "korWord": "두려움",
     "engWord": "Fear",
@@ -445,6 +499,7 @@ List<Map<String, dynamic>> wordData = [
     "history": []
   },
   {
+    "id": 101004,
     "category": CategoryCode.emotion,
     "korWord": "놀람",
     "engWord": "Surprise",
