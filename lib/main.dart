@@ -1,9 +1,10 @@
+import 'package:feature_navigator/feature_router.dart';
 import 'package:flash_card_app/repository/card_repo.dart';
 import 'package:flash_card_app/utill/router.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -40,6 +41,11 @@ class MyApp extends ConsumerWidget {
           cardMethod.setHistory();
 
           final GoRouter router = createRouter(isFirst);
+
+          FeatureRouter(
+            goRouter: router,
+            apiKey: 'your-gpt-api-key',
+          );
 
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
