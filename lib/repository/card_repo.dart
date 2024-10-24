@@ -43,7 +43,7 @@ class CardList extends _$CardList {
   }
 
   List<WordCard> filterByCategory(String? category) {
-    return state.where((card) => card.category.korean == category).toList();
+    return state.where((card) => card.category.english == category).toList();
   }
 
   int getIndex(WordCard word) {

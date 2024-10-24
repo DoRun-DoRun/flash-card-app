@@ -44,16 +44,17 @@ class CategoryPage extends ConsumerWidget {
           children: [
             Expanded(
               child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
-                  ),
-                  itemCount: categoryList.length,
-                  itemBuilder: (context, index) {
-                    final wordCard = categoryList[index];
-                    return CategoryWidget(wordCard: wordCard);
-                  }),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                ),
+                itemCount: categoryList.length,
+                itemBuilder: (context, index) {
+                  final wordCard = categoryList[index];
+                  return CategoryWidget(wordCard: wordCard);
+                },
+              ),
             ),
             const SizedBox(
               height: 48,
@@ -74,10 +75,7 @@ class CategoryPage extends ConsumerWidget {
                         children: [
                           Text(
                             "단어 기록을 초기화하시겠습니까?",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
+                            style: TextStyle(color: Colors.black, fontSize: 20),
                           ),
                           Text("해당 작업은 복구 할 수 없습니다."),
                         ],
